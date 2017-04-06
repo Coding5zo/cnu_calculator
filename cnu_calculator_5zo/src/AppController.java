@@ -16,4 +16,14 @@ public class AppController {
 		else
 			this._appView.outputMessage(MessageID.Error_Input);
 	}
+	
+	public void run(String[] args){
+		this._appView.outputMessage(MessageID.Notice_StartProgram);
+		this._calclulate = new Calculate();
+		
+		this._calclulate.setInfix(args[0]);
+		this.evalExpression();
+		
+		this._appView.outputMessage(MessageID.Notice_EndProgram);
+	}
 }
