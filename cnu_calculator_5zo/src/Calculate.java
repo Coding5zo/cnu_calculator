@@ -163,6 +163,19 @@ public class Calculate {
 	}
 
 	private int inStackPrecedence(char aToken) {
-
+		if (aToken == '+')
+			return 12;
+		else if (aToken == '-')
+			return 12;
+		else if (aToken == '(')
+			return 0;
+		else if (aToken == ')')
+			return 19;
+		else if (aToken == '*')
+			return 13;
+		else if (aToken == '/')
+			return 13;
+		else
+			return -1;
 	}
 }
