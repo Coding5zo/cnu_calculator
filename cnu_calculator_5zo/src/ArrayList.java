@@ -17,6 +17,14 @@ public class ArrayList<T> implements Stack<T> {
 		this._top = -1;
 		this._elements = (T[]) new Object[maxSize];
 	}
+	
+	public boolean isFull() {
+		return (this._top == this._maxSize - 1);
+	}
+
+	public int size() {
+		return this._top + 1;
+	}
 
 	@Override
 	public boolean push(T anEntry) {
