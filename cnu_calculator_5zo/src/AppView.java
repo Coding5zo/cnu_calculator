@@ -7,7 +7,6 @@ public class AppView {
 	public void outputMessage(MessageID aMessageID) {
 		if (aMessageID == MessageID.Notice_StartProgram){
 			System.out.println(" :: 프로그램을 시작합니다. ::");
-			System.out.println("종료할려면 ! 를 입력하세요");
 		}
 		
 		else if (aMessageID == MessageID.Error_Input)
