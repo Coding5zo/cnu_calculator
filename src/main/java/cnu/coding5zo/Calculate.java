@@ -50,30 +50,23 @@ public class Calculate {
 				tempToken = curToken;
 			} else if (!isdigit(curToken) && curToken == ')' && this.oStack.isEmpty()) {
 				return false;
-			} else if (!isdigit(curToken) && curToken == ')' && !this.oStack.isEmpty()) {
+			}
+			poppedToken = (char) this.oStack.pop();
+			while (!isdigit(curToken) && curToken == ')' && !this.oStack.isEmpty() && poppedToken != '(') {
+				this.postfix[p++] = String.valueOf(poppedToken);
 				poppedToken = (char) this.oStack.pop();
-				while (poppedToken != '(') {
-					this.postfix[p++] = String.valueOf(poppedToken);
-					if (this.oStack.isEmpty()) {
-						return false;
-					} else
-						poppedToken = (char) this.oStack.pop();
-				}
-				tempToken = '\0';
-			} else if (!isdigit(curToken) && curToken != ')' && !this.oStack.isEmpty()) {
-				int inComingP = precedence(curToken, 'c');
-				topToken = (char) oStack.peek();
-				while (precedence(topToken, 's') >= inComingP) {
-					poppedToken = (char) this.oStack.pop();
-					this.postfix[p++] = String.valueOf(poppedToken);
-					if (!this.oStack.isEmpty())
-						topToken = (char) this.oStack.peek();
-					else
-						break;
-				}
-				this.oStack.push(curToken);
 				tempToken = '\0';
 			}
+			int inComingP = precedence(curToken, 'c');
+			topToken = (char) oStack.peek();
+			while (!isdigit(curToken) && curToken != ')' && !this.oStack.isEmpty()
+					&& precedence(topToken, 's') >= inComingP) {
+				poppedToken = (char) this.oStack.pop();
+				this.postfix[p++] = String.valueOf(poppedToken);
+				topToken = (char) this.oStack.peek();
+			}
+			this.oStack.push(curToken);
+			tempToken = '\0';
 		}
 		while (!this.oStack.isEmpty()) {
 			this.postfix[p++] = String.valueOf(this.oStack.pop());
