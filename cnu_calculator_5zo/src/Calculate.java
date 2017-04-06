@@ -14,7 +14,7 @@ public class Calculate {
 		this._vStack = new ArrayList<Double>();
 	}
 	public void setInfix(String anInfix) {
-		
+		this._infix = anInfix.toCharArray();
 	}
 
 	public String infix() {
