@@ -84,7 +84,48 @@ public class Calculate {
 	}
 
 	public double evalPostfix() {
-		
+		int p;
+		String curToken;
+		this._vStack = new ArrayList<Double>(this._infix.length);
+
+		p = 0;
+
+		while (p < this._postfix.length && this._postfix[p] !=null) {
+			curToken = this._postfix[p++];
+			if (isdigit(curToken)) {
+				this._vStack.push(Double.parseDouble(String.valueOf(curToken)));
+			} else {
+				double operand1, operand2, result;
+
+				switch (curToken) {
+				case "+":
+					operand2 = this._vStack.pop();
+					operand1 = this._vStack.pop();
+					result = operand1 + operand2;
+					break;
+				case "-":
+					operand2 = this._vStack.pop();
+					operand1 = this._vStack.pop();
+					result = operand1 - operand2;
+					break;
+				case "*":
+					operand2 = this._vStack.pop();
+					operand1 = this._vStack.pop();
+					result = operand1 * operand2;
+					break;
+				case "/":
+					operand2 = this._vStack.pop();
+					operand1 = this._vStack.pop();
+					result = operand1 / operand2;
+					break;
+				default:
+					result = -1;
+					break;
+				}
+				this._vStack.push(result);
+			}	
+		}
+		return this._vStack.pop();
 	}
 
 	
