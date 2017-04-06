@@ -1,6 +1,9 @@
 
 public class TestMain {
-	public static void main(String args[]) throws Exception{
+	private TestMain(){
+	throw new IllegalAccessError("Utility class");
+	}
+	public static void main(String[] args) throws Exception{
 		AppController appController = new AppController();
 		appController.run(args);
 	}
