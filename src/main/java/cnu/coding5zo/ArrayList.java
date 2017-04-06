@@ -20,7 +20,7 @@ public class ArrayList<T> implements Stack<T> {
 	}
 	
 	public boolean isFull() {
-		return (this.top == this.maxSize - 1);
+		return this.top == this.maxSize - 1;
 	}
 
 	public int size() {
@@ -58,7 +58,7 @@ public class ArrayList<T> implements Stack<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return (this.top == -1);
+		return this.top == -1;
 	}
 
 	@Override
