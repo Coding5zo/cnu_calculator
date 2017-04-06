@@ -18,7 +18,7 @@ public class Calculate {
 	}
 
 	public String infix() {
-		
+		return String.valueOf(this._infix);
 	}
 
 	public String postfix() {
