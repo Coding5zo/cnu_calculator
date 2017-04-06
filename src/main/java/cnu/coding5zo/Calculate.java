@@ -1,4 +1,5 @@
 package cnu.coding5zo;
+
 public class Calculate {
 	private ArrayList<Character> _oStack;
 	private ArrayList<Double> _vStack;
@@ -14,6 +15,7 @@ public class Calculate {
 		this._oStack = new ArrayList<Character>();
 		this._vStack = new ArrayList<Double>();
 	}
+
 	public void setInfix(String anInfix) {
 		this._infix = anInfix.toCharArray();
 	}
@@ -39,32 +41,32 @@ public class Calculate {
 		while (i < this._infix.length) {
 			curToken = this._infix[i++];
 			if (isdigit(curToken)) {
-				if(isdigit(tempToken)){
+				if (isdigit(tempToken)) {
 					this._postfix[p - 1] = this._postfix[p - 1] + curToken;
 				} else {
 					this._postfix[p++] = String.valueOf(curToken);
 				}
 				tempToken = curToken;
 			} else {
-				if (curToken == ')') { 
+				if (curToken == ')') {
 					if (!this._oStack.isEmpty()) {
 						poppedToken = (char) this._oStack.pop();
 					} else
-						return false; 
+						return false;
 
 					while (poppedToken != '(') {
 						this._postfix[p++] = String.valueOf(poppedToken);
 						if (!this._oStack.isEmpty()) {
 							poppedToken = (char) this._oStack.pop();
 						} else
-							return false; 
+							return false;
 					}
 					tempToken = '\0';
-				} else { 
-					int inComingP = inComingPrecedence(curToken);
+				} else {
+					int inComingP = Precedence(curToken, 'c');
 					if (!this._oStack.isEmpty()) {
 						topToken = (char) _oStack.peek();
-						while (inStackPrecedence(topToken) >= inComingP) {
+						while (Precedence(topToken, 's') >= inComingP) {
 							poppedToken = (char) this._oStack.pop();
 							this._postfix[p++] = String.valueOf(poppedToken);
 							if (!this._oStack.isEmpty())
@@ -77,7 +79,7 @@ public class Calculate {
 					tempToken = '\0';
 				}
 			}
-		} 
+		}
 		while (!this._oStack.isEmpty()) {
 			this._postfix[p++] = String.valueOf(this._oStack.pop());
 		}
@@ -91,7 +93,7 @@ public class Calculate {
 
 		p = 0;
 
-		while (p < this._postfix.length && this._postfix[p] !=null) {
+		while (p < this._postfix.length && this._postfix[p] != null) {
 			curToken = this._postfix[p++];
 			if (isdigit(curToken)) {
 				this._vStack.push(Double.parseDouble(String.valueOf(curToken)));
@@ -124,13 +126,10 @@ public class Calculate {
 					break;
 				}
 				this._vStack.push(result);
-			}	
+			}
 		}
 		return this._vStack.pop();
 	}
-
-	
-
 
 	private boolean isdigit(char aToken) {
 		if (aToken >= '0' && aToken <= '9') {
@@ -139,40 +138,28 @@ public class Calculate {
 			return false;
 		}
 	}
+
 	private boolean isdigit(String aToken) {
-		if(aToken.length() ==1 && "()+-*/".indexOf(aToken)>=0)
+		if (aToken.length() == 1 && "()+-*/".indexOf(aToken) >= 0)
 			return false;
-		else 
-			return true;
-		
-	}
-	private int inComingPrecedence(char aToken) {
-		if (aToken == '+')
-			return 12;
-		else if (aToken == '-')
-			return 12;
-		else if (aToken == '(')
-			return 20;
-		else if (aToken == ')')
-			return 19;
-		else if (aToken == '*')
-			return 13;
-		else if (aToken == '/')
-			return 13;
 		else
-			return -1;
+			return true;
+
 	}
 
-	private int inStackPrecedence(char aToken) {
+	private int Precedence(char aToken, char CorS) {
 		if (aToken == '+')
 			return 12;
 		else if (aToken == '-')
 			return 12;
 		else if (aToken == '(')
-			return 0;
-		else if (aToken == ')')
+			if(CorS == 'c')
+				return 20;
+			if(CorS == 's')
+				return 0;
+		else if (aToken == ')') {
 			return 19;
-		else if (aToken == '*')
+		} else if (aToken == '*')
 			return 13;
 		else if (aToken == '/')
 			return 13;
