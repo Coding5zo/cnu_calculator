@@ -22,7 +22,7 @@ public class Calculate {
 	}
 
 	public String postfix() {
-		
+		return String.valueOf(this._postfix);
 	}
 
 	public boolean infixToPostfix() {
