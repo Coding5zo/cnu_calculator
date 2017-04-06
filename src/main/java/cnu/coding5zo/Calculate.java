@@ -63,10 +63,10 @@ public class Calculate {
 					}
 					tempToken = '\0';
 				} else {
-					int inComingP = Precedence(curToken, 'c');
+					int inComingP = precedence(curToken, 'c');
 					if (!this.oStack.isEmpty()) {
 						topToken = (char) oStack.peek();
-						while (Precedence(topToken, 's') >= inComingP) {
+						while (precedence(topToken, 's') >= inComingP) {
 							poppedToken = (char) this.oStack.pop();
 							this.postfix[p++] = String.valueOf(poppedToken);
 							if (!this.oStack.isEmpty())
@@ -140,17 +140,11 @@ public class Calculate {
 	}
 
 	private boolean isdigit(String aToken) {
-		if (aToken.length() == 1 && "()+-*/".indexOf(aToken) >= 0)
-			return false;
-		else
-			return true;
-
+		return !(aToken.length() == 1 && "()+-*/".indexOf(aToken) >= 0);
 	}
 
-	private int Precedence(char aToken, char CorS) {
-		if (aToken == '+')
-			return 12;
-		else if (aToken == '-')
+	private int precedence(char aToken, char CorS) {
+		if (aToken == '+' || aToken == '-')
 			return 12;
 		else if (aToken == '(')
 			if(CorS == 'c')
@@ -159,9 +153,7 @@ public class Calculate {
 				return 0;
 		else if (aToken == ')') {
 			return 19;
-		} else if (aToken == '*')
-			return 13;
-		else if (aToken == '/')
+		} else if (aToken == '*' || aToken == '/')
 			return 13;
 		else
 			return -1;
