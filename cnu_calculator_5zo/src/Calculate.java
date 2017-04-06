@@ -139,6 +139,10 @@ public class Calculate {
 		}
 	}
 	private boolean isdigit(String aToken) {
+		if(aToken.length() ==1 && "()+-*/".indexOf(aToken)>=0)
+			return false;
+		else 
+			return true;
 		
 	}
 	private int inComingPrecedence(char aToken) {
