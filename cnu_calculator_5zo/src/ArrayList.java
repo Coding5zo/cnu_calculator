@@ -27,21 +27,35 @@ public class ArrayList<T> implements Stack<T> {
 	}
 
 	@Override
-	public boolean push(T anEntry) {
+	public boolean push(T newElement) {
 		// TODO Auto-generated method stub
-		return false;
+		if (this.isFull()) {
+			return false;
+		} else {
+			this._top++;
+			this._elements[this._top] = newElement;
+			return true;
+		}
 	}
 
 	@Override
 	public T pop() {
 		// TODO Auto-generated method stub
-		return null;
+		if (this.isEmpty()) {
+			return null;
+		} else {
+			return this._elements[this._top--];
+		}
 	}
 
 	@Override
 	public T peek() {
 		// TODO Auto-generated method stub
-		return null;
+		if (this.isEmpty()) {
+			return null;
+		} else {
+			return this._elements[this._top];
+		}
 	}
 
 	@Override
