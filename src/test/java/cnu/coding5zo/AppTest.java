@@ -17,7 +17,9 @@ public class AppTest
      */
     public AppTest( String testName )
     {
-        super( testName );
+        //super( testName );
+    	String[] args = {testName, };
+    	new AppController().run(args);
     }
 
     /**
