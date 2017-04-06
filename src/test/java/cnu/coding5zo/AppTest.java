@@ -19,7 +19,13 @@ public class AppTest
     {
         //super( testName );
     	String[] args = {testName, };
-    	new AppController().run(args);
+    	try {
+			new TestMain();
+			TestMain.main(args);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
     }
 
     /**
