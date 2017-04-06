@@ -19,17 +19,9 @@ public class ArrayList<T> implements Stack<T> {
 		this.elements = (T[]) new Object[maxSize];
 	}
 	
-	public boolean isFull() {
-		return (this.top == this.maxSize - 1);
-	}
-
-	public int size() {
-		return this.top + 1;
-	}
-
 	@Override
 	public boolean push(T newElement) {
-		if (this.isFull()) {
+		if (this.top == this.maxSize - 1) {
 			return false;
 		} else {
 			this.top++;
@@ -58,20 +50,6 @@ public class ArrayList<T> implements Stack<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return (this.top == -1);
-	}
-
-	@Override
-	public void clear() {
-		this.top = -1;
-		this.elements = null;
-	}
-	
-	public T findElementByOrder(int order) {
-		if (this.isEmpty()) {
-			return null;
-		} else {
-			return this.elements[order];
-		}
+		return this.top == -1;
 	}
 }

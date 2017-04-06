@@ -20,14 +20,6 @@ public class Calculate {
 		this.infix = anInfix.toCharArray();
 	}
 
-	public String infix() {
-		return String.valueOf(this.infix);
-	}
-
-	public String postfix() {
-		return String.valueOf(this.postfix);
-	}
-
 	public boolean infixToPostfix() {
 		int i;
 		int p;
