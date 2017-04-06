@@ -20,12 +20,12 @@ public class AppController {
 		}
 		else
 			//Exception. if Input is not for calcaulate print error message
-			this.appView.outputMessage(MessageID.Error_Input);
+			this._appView.outputMessage(MessageID.ERRORINPUT);
 	}
 	
 	public void run(String[] args){
 		//print start the program
-		this.appView.outputMessage(MessageID.Notice_StartProgram);
+		this._appView.outputMessage(MessageID.NOTICESTARTPROGRAM);
 		//create Calculate instance
 		this.calclulate = new Calculate();
 		//save args infix's order
@@ -33,6 +33,6 @@ public class AppController {
 		//finish calculate and print result
 		this.evalExpression();
 		//print program is over
-		this.appView.outputMessage(MessageID.Notice_EndProgram);
+		this._appView.outputMessage(MessageID.NOTICEENDPROGRAM);
 	}
 }
