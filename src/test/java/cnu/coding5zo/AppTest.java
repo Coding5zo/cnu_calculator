@@ -8,31 +8,37 @@ import junit.framework.TestSuite;
  * Unit test for simple App.
  */
 public class AppTest 
-    extends TestCase
+//    extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+//    /**
+//     * Create the test case
+//     *
+//     * @param testName name of the test case
+//     */
+//    public AppTest( String testName )
+//    {
+//        super( testName );
+//    }
+//
+//    /**
+//     * @return the suite of tests being tested
+//     */
+//    public static Test suite()
+//    {
+//        return new TestSuite( AppTest.class );
+//    }
+//
+//    /**
+//     * Rigourous Test :-)
+//     */
+//    public void testApp()
+//    {
+//        assertTrue( true );
+//    }
+    public void testCalculatorAdd () {
+        AppController appController = new AppController();
+        String[] args = {"1+1", };
+        appController.run(args);
+        //assertThat(output, is(2));
     }
 }
