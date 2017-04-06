@@ -8,5 +8,4 @@ public interface Stack<T> {
 	
 	public boolean isEmpty();
 	
-	public void clear();
 }
