@@ -1,82 +1,77 @@
 package cnu.coding5zo;
 public class ArrayList<T> implements Stack<T> {
 	private static final int DEFAULT_MAX_STACK_SIZE = 5;
-	private int _maxSize;
-	private int _top;
-	private T[] _elements;
+	private int maxSize;
+	private int top;
+	private T[] elements;
 
 	@SuppressWarnings("unchecked")
 	public ArrayList() {
-		this._maxSize = DEFAULT_MAX_STACK_SIZE;
-		this._top = -1;
-		this._elements = (T[]) new Object[DEFAULT_MAX_STACK_SIZE];
+		this.maxSize = DEFAULT_MAX_STACK_SIZE;
+		this.top = -1;
+		this.elements = (T[]) new Object[DEFAULT_MAX_STACK_SIZE];
 	}
 
 	@SuppressWarnings("unchecked")
 	public ArrayList(int maxSize) {
-		this._maxSize = maxSize;
-		this._top = -1;
-		this._elements = (T[]) new Object[maxSize];
+		this.maxSize = maxSize;
+		this.top = -1;
+		this.elements = (T[]) new Object[maxSize];
 	}
 	
 	public boolean isFull() {
-		return (this._top == this._maxSize - 1);
+		return (this.top == this.maxSize - 1);
 	}
 
 	public int size() {
-		return this._top + 1;
+		return this.top + 1;
 	}
 
 	@Override
 	public boolean push(T newElement) {
-		// TODO Auto-generated method stub
 		if (this.isFull()) {
 			return false;
 		} else {
-			this._top++;
-			this._elements[this._top] = newElement;
+			this.top++;
+			this.elements[this.top] = newElement;
 			return true;
 		}
 	}
 
 	@Override
 	public T pop() {
-		// TODO Auto-generated method stub
 		if (this.isEmpty()) {
 			return null;
 		} else {
-			return this._elements[this._top--];
+			return this.elements[this.top--];
 		}
 	}
 
 	@Override
 	public T peek() {
-		// TODO Auto-generated method stub
 		if (this.isEmpty()) {
 			return null;
 		} else {
-			return this._elements[this._top];
+			return this.elements[this.top];
 		}
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return (this._top == -1);
+		return (this.top == -1);
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		this._top = -1;
-		this._elements = null;
+		this.top = -1;
+		this.elements = null;
 	}
 	
 	public T findElementByOrder(int order) {
 		if (this.isEmpty()) {
 			return null;
 		} else {
-			return this._elements[order];
+			return this.elements[order];
 		}
 	}
 }
