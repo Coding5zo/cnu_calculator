@@ -132,8 +132,11 @@ public class Calculate {
 
 
 	private boolean isdigit(char aToken) {
-		
-
+		if (aToken >= '0' && aToken <= '9') {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	private boolean isdigit(String aToken) {
 		
