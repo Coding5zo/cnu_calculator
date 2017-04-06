@@ -40,36 +40,50 @@ public class Calculate {
 		i = 0;
 		p = 0;
 
-		while (i < this.infix.length) {
-			curToken = this.infix[i++];
-			if (isdigit(curToken) && isdigit(tempToken)) {
-				this.postfix[p - 1] = this.postfix[p - 1] + curToken;
+		while (i < this. infix.length) {
+			curToken = this. infix[i++];
+			if (isdigit(curToken)) {
+				if (isdigit(tempToken)) {
+					this. postfix[p - 1] = this. postfix[p - 1] + curToken;
+				} else {
+					this. postfix[p++] = String.valueOf(curToken);
+				}
 				tempToken = curToken;
-			} else if (isdigit(curToken) && !isdigit(tempToken)) {
-				this.postfix[p++] = String.valueOf(curToken);
-				tempToken = curToken;
-			} else if (!isdigit(curToken) && curToken == ')' && this.oStack.isEmpty()) {
-				return false;
+			} else {
+				if (curToken == ')') {
+					if (!this. oStack.isEmpty()) {
+						poppedToken = (char) this. oStack.pop();
+					} else
+						return false;
+
+					while (poppedToken != '(') {
+						this. postfix[p++] = String.valueOf(poppedToken);
+						if (!this. oStack.isEmpty()) {
+							poppedToken = (char) this. oStack.pop();
+						} else
+							return false;
+					}
+					tempToken = '\0';
+				} else {
+					int inComingP = precedence(curToken, 'c');
+					if (!this. oStack.isEmpty()) {
+						topToken = (char)  oStack.peek();
+						while (precedence(topToken, 's') >= inComingP) {
+							poppedToken = (char) this. oStack.pop();
+							this. postfix[p++] = String.valueOf(poppedToken);
+							if (!this. oStack.isEmpty())
+								topToken = (char) this. oStack.peek();
+							else
+								break;
+						}
+					}
+					this. oStack.push(curToken);
+					tempToken = '\0';
+				}
 			}
-			poppedToken = (char) this.oStack.pop();
-			while (!isdigit(curToken) && curToken == ')' && !this.oStack.isEmpty() && poppedToken != '(') {
-				this.postfix[p++] = String.valueOf(poppedToken);
-				poppedToken = (char) this.oStack.pop();
-				tempToken = '\0';
-			}
-			int inComingP = precedence(curToken, 'c');
-			topToken = (char) oStack.peek();
-			while (!isdigit(curToken) && curToken != ')' && !this.oStack.isEmpty()
-					&& precedence(topToken, 's') >= inComingP) {
-				poppedToken = (char) this.oStack.pop();
-				this.postfix[p++] = String.valueOf(poppedToken);
-				topToken = (char) this.oStack.peek();
-			}
-			this.oStack.push(curToken);
-			tempToken = '\0';
 		}
-		while (!this.oStack.isEmpty()) {
-			this.postfix[p++] = String.valueOf(this.oStack.pop());
+		while (!this. oStack.isEmpty()) {
+			this. postfix[p++] = String.valueOf(this. oStack.pop());
 		}
 		return true;
 	}
@@ -132,11 +146,11 @@ public class Calculate {
 	private int precedence(char aToken, char corS) {
 		if (aToken == '+' || aToken == '-')
 			return 12;
-		else if (aToken == '(') {
-			if (corS == 'c')
+		else if (aToken == '('){
+			if(corS == 'c')
 				return 20;
 			return 0;
-		} else if (aToken == ')') {
+		}else if (aToken == ')') {
 			return 19;
 		} else if (aToken == '*' || aToken == '/')
 			return 13;
@@ -144,3 +158,4 @@ public class Calculate {
 			return -1;
 	}
 }
+
