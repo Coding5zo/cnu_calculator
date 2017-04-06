@@ -17,15 +17,7 @@ public class AppTest
      */
     public AppTest( String testName )
     {
-        //super( testName );
-    	String[] args = {testName, };
-    	try {
-			new TestMain();
-			TestMain.main(args);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		};
+        super( testName );
     }
 
     /**
