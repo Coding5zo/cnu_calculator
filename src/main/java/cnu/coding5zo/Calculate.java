@@ -12,8 +12,8 @@ public class Calculate {
 		for (int i = 0; i < 100; i++) {
 			this.postfix[i] = null;
 		}
-		this.oStack = new ArrayList<Character>();
-		this.vStack = new ArrayList<Double>();
+		this.oStack = new ArrayList<>();
+		this.vStack = new ArrayList<>();
 	}
 
 	public void setInfix(String anInfix) {
@@ -31,9 +31,11 @@ public class Calculate {
 	public boolean infixToPostfix() {
 		int i;
 		int p;
-		char curToken, poppedToken, topToken;
+		char curToken;
+		char poppedToken;
+		char topToken;
 		char tempToken = '\0';
-		this.oStack = new ArrayList<Character>(this.infix.length);
+		this.oStack = new ArrayList<>(this.infix.length);
 		this.postfix = new String[this.infix.length];
 		i = 0;
 		p = 0;
@@ -89,7 +91,7 @@ public class Calculate {
 	public double evalPostfix() {
 		int p;
 		String curToken;
-		this.vStack = new ArrayList<Double>(this.infix.length);
+		this.vStack = new ArrayList<>(this.infix.length);
 
 		p = 0;
 
@@ -98,7 +100,9 @@ public class Calculate {
 			if (isdigit(curToken)) {
 				this.vStack.push(Double.parseDouble(String.valueOf(curToken)));
 			} else {
-				double operand1, operand2, result;
+				double operand1;
+				double operand2;
+				double result;
 
 				switch (curToken) {
 				case "+":
@@ -132,25 +136,21 @@ public class Calculate {
 	}
 
 	private boolean isdigit(char aToken) {
-		if (aToken >= '0' && aToken <= '9') {
-			return true;
-		} else {
-			return false;
-		}
+		return (aToken >= '0' && aToken <= '9');
 	}
 
 	private boolean isdigit(String aToken) {
 		return !(aToken.length() == 1 && "()+-*/".indexOf(aToken) >= 0);
 	}
 
-	private int precedence(char aToken, char CorS) {
+	private int precedence(char aToken, char corS) {
 		if (aToken == '+' || aToken == '-')
 			return 12;
-		else if (aToken == '(')
-			if(CorS == 'c')
+		else if (aToken == '('){
+			if(corS == 'c')
 				return 20;
-			if(CorS == 's')
-				return 0;
+			return 0;
+		}
 		else if (aToken == ')') {
 			return 19;
 		} else if (aToken == '*' || aToken == '/')
