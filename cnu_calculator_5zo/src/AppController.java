@@ -6,4 +6,14 @@ public class AppController {
 		this._appView = new AppView();
 		this._calclulate = new Calculate();
 	}
+	
+	public void evalExpression(){
+		double finalValue;
+		if(this._calclulate.infixToPostfix()){
+			finalValue = this._calclulate.evalPostfix();
+			this._appView.outputResult(finalValue);
+		}
+		else
+			this._appView.outputMessage(MessageID.Error_Input);
+	}
 }
